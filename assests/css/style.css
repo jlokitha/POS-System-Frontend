@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  max-height: 100vh;
+}
+
+/*CSS for header*/
+
+header {
+  background-color: blue;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav .section-name {
+  font-size: 2rem;
+  color: white;
+}
+
+header nav .navigation ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1px;
+}
+
+header nav .navigation ul li,
+.side-bar ul li {
+  list-style: none;
+}
+
+header nav .navigation ul li a {
+  color: red;
+  text-decoration: none;
+  padding: 10px 12px;
+  background-color: white;
+  cursor: pointer;
+}
+
+header nav #menu,
+#close {
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+header nav .side-bar {
+  width: 100%;
+  padding: 10px 0;
+  display: none;
+}
+
+header nav .side-bar ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+header nav .side-bar ul li {
+  text-align: center;
+}
+
+header nav .side-bar ul li a {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.active {
+  display: block !important;
+}
+
+@media (max-width: 768px) {
+  header nav .navigation {
+    display: none;
+  }
+
+  header nav #menu {
+    display: block;
+  }
+}
