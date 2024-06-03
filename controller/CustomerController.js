@@ -1,3 +1,5 @@
+import { searchCustomer } from "/model/Customer.js";
+
 $(document).ready(() => {
   const custId = $("#cust-id");
   const custIdWarning = $("#cust-id-warning");
@@ -36,4 +38,20 @@ $(document).ready(() => {
       label.css("display", "block");
     }
   }
+
+  custId.on("keydown", (event) => {
+    event.preventDefault();
+
+    if (event.key === "Enter") {
+      const id = custId.val();
+
+      if (id !== "" && id !== undefined) {
+        let customer = searchCustomer(id);
+
+        custName.val(customer.name);
+        custAddress.val(customer.address);
+        custSalary.val(customer.salary);
+      }
+    }
+  });
 });
