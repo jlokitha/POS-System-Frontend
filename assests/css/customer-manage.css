@@ -41,6 +41,7 @@
   height: 5vh;
   border: 2px solid grey;
   border-radius: 10px;
+  padding: 0 10px;
   outline: none;
 }
 
