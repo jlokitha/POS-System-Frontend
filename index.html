@@ -77,22 +77,34 @@
         <form id="cust-form">
           <div class="input-field">
             <label for="cust-id">Customer ID</label>
-            <input type="text" readonly required id="cust-id" />
+            <input type="text" required id="cust-id" />
+            <label class="warning" id="cust-id-warning"
+              >Enter customer ID ex:- C-000</label
+            >
           </div>
 
           <div class="input-field">
             <label for="cust-name">Customer Name</label>
             <input type="text" required id="cust-name" />
+            <label class="warning" id="cust-name-warning"
+              >Should contain at least 3 letters.</label
+            >
           </div>
 
           <div class="input-field">
             <label for="cust-address">Customer Address</label>
             <input type="text" required id="cust-address" />
+            <label class="warning" id="cust-address-warning"
+              >Should contain at least 5 letters.</label
+            >
           </div>
 
           <div class="input-field">
             <label for="cust-salary">Customer Salary</label>
-            <input type="text" required id="cust-salary" />
+            <input type="number" required id="cust-salary" />
+            <label class="warning" id="cust-salary-warning"
+              >Required ex:- 100.00 or 100</label
+            >
           </div>
 
           <div class="button-container">
@@ -130,6 +142,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <script src="/assests/controller/IndexController.js"></script>
+    <script src="/controller/IndexController.js"></script>
+
+    <script src="/controller/CustomerController.js"></script>
   </body>
 </html>

@@ -33,14 +33,20 @@
 .form-container .input-field {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .form-container .input-field input {
   max-width: 530px;
   height: 5vh;
-  border: 1px solid grey;
+  border: 2px solid grey;
   border-radius: 10px;
-  margin-bottom: 20px;
+  outline: none;
+}
+
+.warning {
+  color: red;
+  display: none;
 }
 
 .table-container {
