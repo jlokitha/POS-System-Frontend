@@ -1,22 +1,43 @@
+import { saveCustomer } from "/model/Customer.js";
 import { searchCustomer } from "/model/Customer.js";
+import { getAllCustomers } from "/model/Customer.js";
 
 $(document).ready(() => {
+  loadAllCustomers();
+
   const custId = $("#cust-id");
-  const custIdWarning = $("#cust-id-warning");
-
   const custName = $("#cust-name");
-  const custNameWarning = $("#cust-name-warning");
-
   const custAddress = $("#cust-address");
-  const custAddressWarning = $("#cust-address-warning");
-
   const custSalary = $("#cust-salary");
+
+  const custIdWarning = $("#cust-id-warning");
+  const custNameWarning = $("#cust-name-warning");
+  const custAddressWarning = $("#cust-address-warning");
   const custSalaryWarning = $("#cust-salary-warning");
 
   const custIdRegex = /^C-(?!0{3})\d{3,}$/;
   const custNameRegex = /^[A-Za-z]{3,}$/;
   const custAddressRegex = /^(No \d+, )?[a-zA-Z]{5,}$/;
   const custSalaryRegex = /\$?\d{1,3}(,\d{3})*(\.\d{2})?(\s?K|\s?k|\s?M|\s?m)?/;
+
+  $("#btn-save").on("click", (event) => {
+    event.preventDefault();
+
+    let id = custId.val();
+    let name = custName.val();
+    let address = custAddress.val();
+    let salary = custSalary.val();
+
+    saveCustomer({
+      id: id,
+      name: name,
+      address: address,
+      salary: salary,
+    });
+
+    alert("Customer Saved!!!");
+    loadAllCustomers();
+  });
 
   custId.on("input", () => validate(custId, custIdRegex, custIdWarning));
   custName.on("input", () =>
@@ -40,9 +61,8 @@ $(document).ready(() => {
   }
 
   custId.on("keydown", (event) => {
-    event.preventDefault();
-
     if (event.key === "Enter") {
+      event.preventDefault();
       const id = custId.val();
 
       if (id !== "" && id !== undefined) {
@@ -54,4 +74,23 @@ $(document).ready(() => {
       }
     }
   });
+
+  function loadAllCustomers() {
+    $("#cust-table tbody").empty();
+
+    for (var i = 0; i < getAllCustomers().length; i++) {
+      appendToTable(getAllCustomers()[i]);
+    }
+  }
+
+  function appendToTable(customer) {
+    $("#cust-table tbody").append(
+      `<tr>
+        <td>${customer.id}</td>
+        <td>${customer.name}</td>
+        <td>${customer.address}</td>
+        <td>${customer.salary}</td>
+      </tr>`
+    );
+  }
 });
