@@ -13,6 +13,15 @@ body {
   max-height: 100vh;
 }
 
+section {
+  padding: 10px 20px;
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
 /*CSS for header*/
 
 header {

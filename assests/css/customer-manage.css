@@ -1,0 +1,79 @@
+#customer-manage {
+  width: 100%;
+  height: 90vh;
+  display: grid;
+  grid-template-columns: 30% 69%;
+  justify-content: space-between;
+}
+
+.form-container .button-container button {
+  padding: 10px 12px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.blue-btn {
+  background-color: blue;
+}
+
+.red-btn {
+  background-color: red;
+}
+
+.yellow-btn {
+  background-color: yellow;
+  color: black !important;
+}
+
+.green-btn {
+  background-color: green;
+}
+
+.form-container .input-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container .input-field input {
+  max-width: 530px;
+  height: 5vh;
+  border: 1px solid grey;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  width: 100%;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.table-container::-webkit-scrollbar {
+  display: none;
+}
+
+#cust-table {
+  border-collapse: collapse;
+  width: 100%;
+  position: relative;
+}
+
+#cust-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+#cust-table thead th,
+td {
+  height: 50px;
+  padding: 12px 10px;
+  border: 1px solid rgb(196, 195, 195);
+  text-align: center;
+}
+
+#cust-table thead th {
+  background-color: red;
+  color: white;
+}
