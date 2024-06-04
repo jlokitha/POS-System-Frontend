@@ -32,7 +32,7 @@ $("document").ready(() => {
     event.preventDefault();
     itemId.val(getNewItemId());
 
-    if (validateAll) {
+    if (validateAll()) {
       saveItem({
         id: itemId.val(),
         desc: itemDesc.val(),
@@ -48,10 +48,64 @@ $("document").ready(() => {
     }
   });
 
+  // Event listner for update button
+  $("#btn-item-update").click((event) => {
+    event.preventDefault();
+
+    if (validateAll()) {
+      updateItem({
+        id: itemId.val(),
+        desc: itemDesc.val(),
+        qty: itemQty.val(),
+        price: itemPrice.val(),
+      });
+
+      loadAllItems();
+      clearInputs();
+      alert("Item Updated!!!");
+    } else {
+      alert("Item not Updated!!!");
+    }
+  });
+
+  // Event listner for remove button
+  $("#btn-item-remove").click((event) => {
+    event.preventDefault();
+
+    let result = removeItem({
+      id: itemId.val(),
+      desc: itemDesc.val(),
+      qty: itemQty.val(),
+      price: itemPrice.val(),
+    });
+
+    if (result) {
+      loadAllItems();
+      clearInputs();
+      alert("Item Removed!!!");
+    } else {
+      alert("Item not Removed!!!");
+    }
+  });
+
   // Event listner for clear all button
   $("#btn-item-clear-all").click((event) => {
     event.preventDefault();
     clearInputs();
+  });
+
+  // Click event listener for table row
+  $("#item-table tbody").on("click", "tr", function () {
+    let id = $(this).children("td:eq(0)").text();
+    let desc = $(this).children("td:eq(1)").text();
+    let qty = $(this).children("td:eq(2)").text();
+    let price = $(this).children("td:eq(3)").text();
+
+    $("#btn-item-save").hide();
+    itemId.val(id).attr("readonly", true);
+    itemDesc.val(desc);
+    itemQty.val(qty);
+    itemPrice.val(price);
   });
 
   // Event listeners for input validation
@@ -63,6 +117,29 @@ $("document").ready(() => {
   itemPrice.on("input", () =>
     validate(itemPrice, itemPriceRegex, itemPriceWarning)
   );
+
+  // Function to validate all fields
+  function validateAll() {
+    let result;
+
+    result = validate(itemId, itemIdRegex, itemIdWarning);
+
+    if (result) {
+      result = validate(itemDesc, itemDescRegex, itemDescWarning);
+
+      if (result) {
+        result = validate(itemQty, itemQtyRegex, itemQtyWarning);
+
+        if (result) {
+          result = validate(itemPrice, itemPriceRegex, itemPriceWarning);
+
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
 
   // Keydown event listener for itemId
   itemId.keydown((event) => {
