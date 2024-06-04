@@ -19,9 +19,7 @@ export function removeCustomer(customer) {
 }
 
 export function searchCustomer(custId) {
-  const customer = customers.find((cust) => {
-    return cust.id === custId;
-  });
+  const customer = customers.find((cust) => cust.id === custId);
 
   return customer !== undefined ? customer : false;
 }

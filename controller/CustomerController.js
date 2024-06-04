@@ -1,14 +1,14 @@
-import { saveCustomer } from "/model/Customer.js";
-import { updateCustomer } from "/model/Customer.js";
+import { saveCustomer } from "../model/Customer.js";
+import { updateCustomer } from "../model/Customer.js";
 import { removeCustomer } from "../model/Customer.js";
-import { searchCustomer } from "/model/Customer.js";
-import { getAllCustomers } from "/model/Customer.js";
+import { searchCustomer } from "../model/Customer.js";
+import { getAllCustomers } from "../model/Customer.js";
 
 $(document).ready(() => {
   // Load all customers when the document is ready
   loadAllCustomers();
 
-  // JQuery selectors
+  // Elements for reuse
   const custId = $("#cust-id");
   const custName = $("#cust-name");
   const custAddress = $("#cust-address");
@@ -23,7 +23,8 @@ $(document).ready(() => {
   const custIdRegex = /^C-(?!0{3})\d{3,}$/;
   const custNameRegex = /^[A-Za-z]{3,}(?:\s+[A-Za-z]{3,})*$/;
   const custAddressRegex = /(?=(?:.*[A-Za-z0-9]){5})[A-Za-z0-9'\.\-\s\,]/;
-  const custSalaryRegex = /\$?\d{1,3}(,\d{3})*(\.\d{2})?(\s?K|\s?k|\s?M|\s?m)?/;
+  const custSalaryRegex =
+    /^(\$?\d{1,3}(,\d{3})*|\d+)(\.\d{2})?(\s?K|\s?k|\s?M|\s?m)?$/;
 
   // Event listener for save button
   $("#btn-cust-save").click((event) => {
@@ -39,8 +40,8 @@ $(document).ready(() => {
       });
 
       loadAllCustomers();
-      alert("Customer Saved!!!");
       clearInputs();
+      alert("Customer Saved!!!");
     } else {
       alert("Customer not Saved!!!");
     }
@@ -155,13 +156,14 @@ $(document).ready(() => {
           custSalary.val(customer.salary);
         } else {
           alert("Customer not found!!!");
+          clearInputs();
         }
       } else {
         custId.val("").css("border-color", "green");
         custIdWarning.hide();
         custId.val(getNewCustId());
+        custName.focus();
       }
-      custName.focus();
     }
   });
 

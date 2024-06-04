@@ -98,6 +98,70 @@ header nav .side-bar ul li a {
   display: block !important;
 }
 
+/* CSS for input field */
+.form-container .input-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-container .input-field input {
+  max-width: 530px;
+  height: 5vh;
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 0 10px;
+  outline: none;
+}
+
+/* CSS for buttons */
+.form-container .button-container button {
+  padding: 10px 12px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.blue-btn {
+  background-color: blue;
+}
+
+.red-btn {
+  background-color: red;
+}
+
+.yellow-btn {
+  background-color: yellow;
+  color: black !important;
+}
+
+.green-btn {
+  background-color: green;
+}
+
+/* CSS for warning label */
+.warning {
+  color: red;
+  display: none;
+}
+
+/* CSS for table container */
+.table-container {
+  width: 100%;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.table-container::-webkit-scrollbar {
+  display: none;
+}
+
+td {
+  cursor: pointer;
+}
+
+/* Media query for header */
 @media (max-width: 768px) {
   header nav .navigation {
     display: none;

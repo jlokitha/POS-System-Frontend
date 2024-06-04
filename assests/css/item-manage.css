@@ -1,33 +1,32 @@
-#customer-manage {
+#item-manage {
   width: 100%;
   height: 90vh;
   display: grid;
   grid-template-columns: 30% 69%;
   justify-content: space-between;
-  display: none;
 }
 
-#cust-table {
+#item-table {
   border-collapse: collapse;
   width: 100%;
   position: relative;
 }
 
-#cust-table thead {
+#item-table thead {
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
-#cust-table thead th,
+#item-table thead th,
 td {
   height: 50px;
   padding: 12px 10px;
-  border: 1px solid rgb(196, 195, 195);
+  border-bottom: 1px solid rgb(196, 195, 195);
   text-align: center;
 }
 
-#cust-table thead th {
+#item-table thead th {
   background-color: red;
   color: white;
 }
