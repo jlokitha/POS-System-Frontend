@@ -5,9 +5,6 @@ import { searchItem } from "../model/Item.js";
 import { getAllItems } from "../model/Item.js";
 
 $("document").ready(() => {
-  // Load all items when document is ready
-  loadAllItems();
-
   //Elements for reuse
   const itemId = $("#item-id");
   const itemDesc = $("#item-desc");
@@ -25,6 +22,10 @@ $("document").ready(() => {
   const itemQtyRegex = /^\d+(?:\.\d+)?$/;
   const itemPriceRegex =
     /^(\$?\d{1,3}(,\d{3})*|\d+)(\.\d{2})?(\s?K|\s?k|\s?M|\s?m)?$/;
+
+  // Load all items when document is ready
+  loadAllItems();
+  itemId.focus();
 
   // Event listener for save button
   $("#btn-item-save").click((event) => {
@@ -47,6 +48,12 @@ $("document").ready(() => {
     }
   });
 
+  // Event listner for clear all button
+  $("#btn-item-clear-all").click((event) => {
+    event.preventDefault();
+    clearInputs();
+  });
+
   // Event listeners for input validation
   itemId.on("input", () => validate(itemId, itemIdRegex, itemIdWarning));
   itemDesc.on("input", () =>
@@ -56,6 +63,32 @@ $("document").ready(() => {
   itemPrice.on("input", () =>
     validate(itemPrice, itemPriceRegex, itemPriceWarning)
   );
+
+  // Keydown event listener for itemId
+  itemId.keydown((event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const id = itemId.val();
+
+      if (id) {
+        let item = searchItem(id);
+
+        if (item) {
+          itemDesc.val(item.desc);
+          itemQty.val(item.qty);
+          itemPrice.val(item.price);
+        } else {
+          alert("Item not found!!!");
+          clearInputs();
+        }
+      } else {
+        itemId.val("").css("border-color", "green");
+        itemIdWarning.hide();
+        itemId.val(getNewItemId());
+        itemDesc.focus();
+      }
+    }
+  });
 
   // Function to load all items into the table
   function loadAllItems() {
