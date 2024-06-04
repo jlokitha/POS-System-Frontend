@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="/assests/css/style.css" />
 
     <link rel="stylesheet" href="/assests/css/customer-manage.css" />
+
+    <link rel="stylesheet" href="/assests/css/item-manage.css" />
   </head>
 
   <body>
@@ -79,7 +81,7 @@
             <label for="cust-id">Customer ID</label>
             <input type="text" required id="cust-id" />
             <label class="warning" id="cust-id-warning"
-              >Enter customer ID ex:- C-000</label
+              >Enter Customer Id ex:- C-000</label
             >
           </div>
 
@@ -103,7 +105,7 @@
             <label for="cust-salary">Customer Salary</label>
             <input type="number" required id="cust-salary" />
             <label class="warning" id="cust-salary-warning"
-              >Required ex:- 100.00 or 100</label
+              >Required! ex:- 100.00 or 100</label
             >
           </div>
 
@@ -111,7 +113,6 @@
             <button class="blue-btn" id="btn-cust-save">Save Customer</button>
             <button class="red-btn" id="btn-cust-remove">Remove</button>
             <button class="yellow-btn" id="btn-cust-update">Update</button>
-            <!-- <button class="green-btn" id="btn-get-all">Get All</button> -->
             <button class="red-btn" id="btn-cust-clear-all">Clear All</button>
           </div>
         </form>
@@ -133,10 +134,74 @@
       </div>
     </section>
 
+    <section id="item-manage">
+      <div class="form-container">
+        <h1>Item Form</h1>
+
+        <form id="item-form">
+          <div class="input-field">
+            <label for="item-id">Item ID</label>
+            <input type="text" required id="item-id" />
+            <label class="warning" id="item-id-warning"
+              >Enter Item Id ex:- I-000</label
+            >
+          </div>
+
+          <div class="input-field">
+            <label for="item-desc">Item Description</label>
+            <input type="text" required id="item-desc" />
+            <label class="warning" id="item-name-warning"
+              >Should contain at least 3 letters.</label
+            >
+          </div>
+
+          <div class="input-field">
+            <label for="item-qty">Item Qauntity</label>
+            <input type="number" required id="item-qty" />
+            <label class="warning" id="item-qty-warning"
+              >Required! Enter only positive numbers</label
+            >
+          </div>
+
+          <div class="input-field">
+            <label for="item-price">Item Price</label>
+            <input type="number" required id="item-price" />
+            <label class="warning" id="item-price-warning"
+              >Required! ex:- 100.00 or 100</label
+            >
+          </div>
+
+          <div class="button-container">
+            <button class="blue-btn" id="btn-item-save">Save Item</button>
+            <button class="red-btn" id="btn-item-remove">Remove</button>
+            <button class="yellow-btn" id="btn-item-update">Update</button>
+            <button class="red-btn" id="btn-item-clear-all">Clear All</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table id="item-table">
+          <thead>
+            <tr>
+              <th>Item Id</th>
+              <th>Item Desc</th>
+              <th>Item Qauntity</th>
+              <th>Item Price</th>
+            </tr>
+          </thead>
+
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script type="module" src="/controller/IndexController.js"></script>
 
     <script type="module" src="/controller/CustomerController.js"></script>
+
+    <script type="module" src="/controller/ItemController.js"></script>
   </body>
 </html>
