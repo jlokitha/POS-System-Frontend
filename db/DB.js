@@ -29,3 +29,5 @@ export let items = [
     price: 80,
   },
 ];
+
+export let orders = [];

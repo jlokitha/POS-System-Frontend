@@ -11,6 +11,7 @@
 
 body {
   max-height: 100vh;
+  background-color: rgb(235, 235, 235);
 }
 
 section {
@@ -105,13 +106,16 @@ header nav .side-bar ul li a {
   margin-bottom: 20px;
 }
 
-.form-container .input-field input {
+.form-container .input-field input,
+select {
   max-width: 530px;
+  min-width: 200px;
   height: 5vh;
   border: 2px solid grey;
   border-radius: 10px;
   padding: 0 10px;
   outline: none;
+  background-color: white;
 }
 
 /* CSS for buttons */

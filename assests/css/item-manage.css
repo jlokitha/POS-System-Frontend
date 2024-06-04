@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: 30% 69%;
   justify-content: space-between;
+  display: none;
 }
 
 #item-table {
