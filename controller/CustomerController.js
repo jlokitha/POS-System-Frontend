@@ -1,4 +1,6 @@
 import { saveCustomer } from "/model/Customer.js";
+import { updateCustomer } from "/model/Customer.js";
+import { removeCustomer } from "../model/Customer.js";
 import { searchCustomer } from "/model/Customer.js";
 import { getAllCustomers } from "/model/Customer.js";
 
@@ -24,7 +26,7 @@ $(document).ready(() => {
   const custSalaryRegex = /\$?\d{1,3}(,\d{3})*(\.\d{2})?(\s?K|\s?k|\s?M|\s?m)?/;
 
   // Event listener for save button
-  $("#btn-save").on("click", (event) => {
+  $("#btn-cust-save").click((event) => {
     event.preventDefault();
     custId.val(getNewCustId());
 
@@ -40,12 +42,52 @@ $(document).ready(() => {
       alert("Customer Saved!!!");
       clearInputs();
     } else {
-      alert("Something went wrong!!!");
+      alert("Customer not Saved!!!");
+    }
+  });
+
+  // Event listener for update button
+  $("#btn-cust-update").click((event) => {
+    event.preventDefault();
+
+    if (validateAll()) {
+      updateCustomer({
+        id: custId.val(),
+        name: custName.val(),
+        address: custAddress.val(),
+        salary: custSalary.val(),
+      });
+
+      loadAllCustomers();
+      alert("Customer Updated!!!");
+      clearInputs();
+    } else {
+      alert("Customer not Updated!!!");
+    }
+  });
+
+  // Event listener for remove button
+  $("#btn-cust-remove").click((event) => {
+    event.preventDefault();
+
+    let result = removeCustomer({
+      id: custId.val(),
+      name: custName.val(),
+      address: custAddress.val(),
+      salary: custSalary.val(),
+    });
+
+    if (result) {
+      loadAllCustomers();
+      alert("Customer Removed!!!");
+      clearInputs();
+    } else {
+      alert("Customer not Removed!!!");
     }
   });
 
   // Event listener for clear all button
-  $("#btn-clear-all").on("click", (event) => {
+  $("#btn-cust-clear-all").click((event) => {
     event.preventDefault();
     clearInputs();
   });
@@ -99,7 +141,7 @@ $(document).ready(() => {
   }
 
   // Keydown event listener for custId
-  custId.on("keydown", (event) => {
+  custId.keydown((event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       const id = custId.val();
@@ -115,7 +157,7 @@ $(document).ready(() => {
           alert("Customer not found!!!");
         }
       } else {
-        custId.val("").css("border-color", "grey");
+        custId.val("").css("border-color", "green");
         custIdWarning.hide();
         custId.val(getNewCustId());
       }
@@ -144,7 +186,9 @@ $(document).ready(() => {
 
   // Function to clear all input fields
   function clearInputs() {
-    custId.val("").css("border-color", "grey");
+    $("#btn-cust-save").show();
+
+    custId.val("").css("border-color", "grey").attr("readonly", false);
     custName.val("").css("border-color", "grey");
     custAddress.val("").css("border-color", "grey");
     custSalary.val("").css("border-color", "grey");
@@ -167,4 +211,18 @@ $(document).ready(() => {
     let num = parseInt(parts[1], 10) + 1;
     return parts[0] + "-" + num.toString().padStart(3, "0");
   }
+
+  // Click event listener for table row
+  $("#cust-table tbody").on("click", "tr", function () {
+    let id = $(this).children("td:eq(0)").text();
+    let name = $(this).children("td:eq(1)").text();
+    let address = $(this).children("td:eq(2)").text();
+    let salary = $(this).children("td:eq(3)").text();
+
+    $("#btn-cust-save").hide();
+    custId.val(id).attr("readonly", true);
+    custName.val(name);
+    custAddress.val(address);
+    custSalary.val(salary);
+  });
 });
