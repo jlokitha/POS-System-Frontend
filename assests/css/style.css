@@ -10,7 +10,8 @@
 }
 
 body {
-  max-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background-color: rgb(235, 235, 235);
 }
 
@@ -46,14 +47,14 @@ header nav .section-name {
 
 header nav .navigation ul {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  gap: 1px;
 }
 
 header nav .navigation ul li,
 .side-bar ul li {
   list-style: none;
+  margin-right: 1px;
 }
 
 header nav .navigation ul li a {
@@ -104,18 +105,18 @@ header nav .side-bar ul li a {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  flex: 1;
 }
 
-.form-container .input-field input,
+.input-field input,
 select {
-  max-width: 530px;
-  min-width: 200px;
   height: 5vh;
   border: 2px solid grey;
   border-radius: 10px;
   padding: 0 10px;
   outline: none;
   background-color: white;
+  box-sizing: border-box;
 }
 
 /* CSS for buttons */
