@@ -3,7 +3,7 @@ export let customers = [
     id: "C-001",
     name: "Janindu",
     address: "Matara",
-    salary: 80000,
+    salary: 50000,
   },
 
   {

@@ -5,9 +5,6 @@ import { searchCustomer } from "../model/Customer.js";
 import { getAllCustomers } from "../model/Customer.js";
 
 $(document).ready(() => {
-  // Load all customers when the document is ready
-  loadAllCustomers();
-
   // Elements for reuse
   const custId = $("#cust-id");
   const custName = $("#cust-name");
@@ -25,6 +22,9 @@ $(document).ready(() => {
   const custAddressRegex = /(?=(?:.*[A-Za-z0-9]){5})[A-Za-z0-9'\.\-\s\,]/;
   const custSalaryRegex =
     /^(\$?\d{1,3}(,\d{3})*|\d+)(\.\d{2})?(\s?K|\s?k|\s?M|\s?m)?$/;
+
+  // Load all customers when the document is ready
+  loadAllCustomers();
 
   // Event listener for save button
   $("#btn-cust-save").click((event) => {
