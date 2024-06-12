@@ -314,13 +314,13 @@
           <div class="balance-container">
             <div class="total">
               <label class="blue-text">Total : </label>
-              <label class="blue-text">00.0</label>
+              <label class="blue-text" id="total">00.0</label>
               <label class="blue-text">Rs/=</label>
             </div>
 
             <div class="total">
               <label class="red-text">SubTotal : </label>
-              <label class="red-text">00.0</label>
+              <label class="red-text" id="sub-total">00.0</label>
               <label class="red-text">Rs/=</label>
             </div>
           </div>
@@ -328,22 +328,25 @@
           <div class="field-row">
             <div class="input-field">
               <label for="cash">Cash :</label>
-              <input type="num" id="cash" required />
+              <input type="number" id="cash" required />
+              <label class="warning" id="cash-warning"
+                >Insuffient amount!</label
+              >
             </div>
 
             <div class="input-field">
               <label for="discount">Discount :</label>
-              <input type="num" id="discount" required />
+              <input type="number" id="discount" required />
             </div>
           </div>
 
           <div class="input-field">
             <label for="balance">Balance :</label>
-            <input type="num" id="balance" required />
+            <input type="number" id="balance" required readonly />
           </div>
 
           <div class="button-container">
-            <button class="green-btn">Purchase</button>
+            <button class="green-btn" id="btn-purchase">Purchase</button>
           </div>
         </form>
       </div>

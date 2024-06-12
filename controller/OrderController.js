@@ -3,6 +3,9 @@ import { getAllCustomers } from "../model/Customer.js";
 import { searchItem } from "../model/Item.js";
 import { getAllItems } from "../model/Item.js";
 import { getAllOrders } from "../model/Orders.js";
+import { saveOrder } from "../model/Orders.js";
+import { updateItemQty } from "../model/Item.js";
+import { saveOrderDetail } from "../model/OrderDetails.js";
 
 $(document).ready(() => {
   // Elements for reuse
@@ -23,6 +26,13 @@ $(document).ready(() => {
   const itemTable = $("#added-item tbody");
   const oQtyWarning = $("#ordered-qty-warning");
 
+  const fullTotal = $("#total");
+  const subTotal = $("#sub-total");
+  const cash = $("#cash");
+  const discount = $("#discount");
+  const balance = $("#balance");
+  const cashWarning = $("#cash-warning");
+
   let initialQty = 0;
   let previousValue = 0;
 
@@ -34,15 +44,84 @@ $(document).ready(() => {
   loadAllCustomerIds();
   loadAllItemIds();
 
+  cash.on("input", () => {
+    const tot = parseFloat(subTotal.text());
+    const cashValue = parseFloat(cash.val());
+
+    if (cashValue >= tot) {
+      calculateBalance();
+      cashWarning.hide();
+    } else {
+      cashWarning.show();
+    }
+  });
+
+  $("#btn-purchase").click((event) => {
+    event.preventDefault();
+
+    const custSelected = dCustomer.val();
+
+    if (custSelected) {
+      const subTot = parseFloat(subTotal.text());
+      const cashValue = parseFloat(cash.val());
+
+      if ($("#added-item tbody tr").length > 0) {
+        if (cashValue >= subTot) {
+          saveOrder({
+            id: orderId.val(),
+            customer: dCustomer.val(),
+            total: fullTotal.text(),
+            discount: discount.val(),
+            date: orderDate.val(),
+          });
+
+          $("#added-item tbody tr").each(function () {
+            const iCode = $(this).find("td").eq(0).text();
+            const iQty = parseInt($(this).find("td").eq(3).text(), 10);
+
+            updateItemQty(iCode, iQty);
+
+            saveOrderDetail({
+              orderId: orderId.val(),
+              itemCode: iCode,
+              qty: iQty,
+            });
+          });
+
+          alert("Order purchased!");
+          clearCustomerFileds();
+          clearItemFileds();
+          clearPurchaseFields();
+          itemTable.empty();
+        } else {
+          alert("Insuffient amount!");
+        }
+      } else {
+        alert("Please add items!");
+      }
+    } else {
+      alert("Please select a customer Id!");
+    }
+  });
+
   $("#add-item").click((event) => {
     event.preventDefault();
     let current = parseInt(oQty.val(), 10) || 0;
 
     if (current > -1 && current < initialQty) {
       if (addItem()) {
+        calculateTotal();
+        calculateSubTotal();
+        calculateBalance();
         clearItemFileds();
       }
     }
+  });
+
+  discount.on("input", () => {
+    calculateSubTotal();
+    calculateTotal();
+    calculateBalance();
   });
 
   function addItem() {
@@ -100,6 +179,41 @@ $(document).ready(() => {
       oQtyWarning.show();
     }
   });
+
+  // Function to calculate total
+  function calculateTotal() {
+    let total = 0;
+
+    $("#added-item tbody tr").each(function () {
+      total += parseFloat($(this).find("td").eq(4).text());
+    });
+
+    fullTotal.text(total);
+  }
+
+  // Function to calculate sub-total
+  function calculateSubTotal() {
+    const tot = parseFloat(fullTotal.text());
+    const discountValue = parseFloat(discount.val());
+
+    if (discountValue) {
+      if (discountValue <= 100 && discountValue >= 0) {
+        subTotal.text(tot - (tot * discountValue) / 100);
+      } else {
+        alert("Invalid discount! Discount should be between 0 and 100!");
+      }
+    } else {
+      subTotal.text(tot);
+    }
+  }
+
+  // Function to calculate balance
+  function calculateBalance() {
+    const subTot = parseFloat(subTotal.text());
+    const cashValue = parseFloat(cash.val());
+
+    balance.val(cashValue - subTot);
+  }
 
   // Function to load all customer ids
   function loadAllCustomerIds() {
@@ -167,6 +281,16 @@ $(document).ready(() => {
     }
   });
 
+  function clearCustomerFileds() {
+    orderId.val("");
+    orderDate.val("");
+    dCustomer.val("");
+    cId.val("");
+    cName.val("");
+    cAddress.val("");
+    cSalary.val("");
+  }
+
   function clearItemFileds() {
     dItem.val("");
     iCode.val("");
@@ -176,6 +300,14 @@ $(document).ready(() => {
     oQty.val("");
 
     oQtyWarning.hide();
+  }
+
+  function clearPurchaseFields() {
+    fullTotal.text("00.0");
+    subTotal.text("00.0");
+    cash.val("");
+    discount.val("");
+    balance.val("");
   }
 
   // Set current date
