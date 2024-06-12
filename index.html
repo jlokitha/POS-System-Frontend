@@ -262,7 +262,12 @@
             <div class="field-row">
               <div class="input-field">
                 <label for="item">Item :</label>
-                <select id="item" required></select>
+                <select id="item" required>
+                  <option hidden></option>
+                </select>
+                <label class="warning" id="item-warning"
+                  >Required! Please select Item Id.</label
+                >
               </div>
 
               <div class="input-field">
@@ -291,12 +296,16 @@
 
               <div class="input-field">
                 <label for="ordered-qty">Ordered Quantity :</label>
-                <input type="num" id="ordered-qty" required />
+                <input type="number" id="ordered-qty" required />
+                <label class="warning" id="ordered-qty-warning"
+                  >Qty should be positive number and can not exceed Qty on
+                  Hand!</label
+                >
               </div>
             </div>
 
             <div class="button-container">
-              <button class="red-btn">Add Item</button>
+              <button class="red-btn" id="add-item">Add Item</button>
             </div>
           </div>
         </form>
@@ -339,18 +348,17 @@
         </form>
       </div>
 
-      <div class="table-container">
-        <table id="added-item">
-          <thead>
-            <th>Item Id</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-          </thead>
+      <table id="added-item">
+        <thead>
+          <th>Item Id</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </thead>
 
-          <tbody></tbody>
-        </table>
-      </div>
+        <tbody></tbody>
+      </table>
     </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

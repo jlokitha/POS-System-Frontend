@@ -1,6 +1,7 @@
 #order-manage {
   max-width: 100%;
-  height: 90vh;
+  height: 88vh;
+  overflow: hidden;
   /* display: none; */
 }
 
@@ -84,17 +85,23 @@
 }
 
 #added-item {
+  height: 300px;
+  border: 5px solid black;
   margin-top: 20px;
   border-collapse: collapse;
   width: 100%;
   position: relative;
   border-radius: 10px 10px 0 0;
-  overflow: hidden;
+  overflow-x: scroll;
+}
+
+#added-item tbody {
+  overflow-x: scroll;
 }
 
 #added-item thead {
   position: sticky;
-  top: 0;
+  top: 0px;
   z-index: 10;
 }
 
