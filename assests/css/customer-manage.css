@@ -1,6 +1,7 @@
 #customer-manage {
   width: 100%;
   height: 85vh;
+  margin-top: 10px;
   display: grid;
   grid-template-columns: 30% 69%;
   justify-content: space-between;
