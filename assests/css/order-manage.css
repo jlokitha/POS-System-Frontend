@@ -6,11 +6,11 @@
 
 #order-manage .form-container {
   display: flex;
-  gap: 1%;
+  gap: 10px;
 }
 
 .form-title {
-  background-color: green;
+  background-color: #3572ef;
   padding: 10px 20px;
   border-radius: 10px 10px 0 0;
 }
@@ -76,7 +76,7 @@
 }
 
 .blue-text {
-  color: blue;
+  color: #050c9c;
 }
 
 .red-text {
@@ -90,6 +90,7 @@
   margin-top: 20px;
   position: relative;
   overflow-y: scroll;
+  border-radius: 10px 10px 0 0;
 }
 
 .table-wrapper::-webkit-scrollbar {
@@ -105,6 +106,7 @@
   position: sticky;
   top: 0px;
   z-index: 10;
+  border-radius: 10px 10px 0 0;
 }
 
 #added-item thead th,
@@ -117,6 +119,6 @@ td {
 }
 
 #added-item thead th {
-  background-color: rgb(43, 126, 235);
+  background-color: #3572ef;
   color: white;
 }
