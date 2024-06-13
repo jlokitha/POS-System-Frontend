@@ -1,0 +1,122 @@
+#order-manage {
+  max-width: 100%;
+  height: 88vh;
+  overflow: hidden;
+}
+
+#order-manage .form-container {
+  display: flex;
+  gap: 1%;
+}
+
+.form-title {
+  background-color: green;
+  padding: 10px 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.form-title h2 {
+  color: white;
+  font-size: 1.1rem;
+}
+
+.fields-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#order-manage .form-container form {
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+}
+
+#order-manage .form-container form:last-child {
+  padding: 1%;
+}
+
+#order-manage .form-container form:first-child {
+  flex-basis: 30%;
+}
+
+#order-manage .form-container form:nth-child(2) {
+  flex-basis: 45%;
+}
+
+#order-manage .form-container form:last-child {
+  flex-basis: 25%;
+}
+
+#order-manage .form-container form .field-row {
+  width: 100%;
+  display: flex;
+  gap: 1%;
+}
+
+.fields-container {
+  padding: 2%;
+}
+
+#order-manage .button-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.balance-container {
+  margin: 20px 0;
+}
+
+.total {
+  font-size: 1.5rem;
+}
+
+.blue-text {
+  color: blue;
+}
+
+.red-text {
+  color: red;
+}
+
+.table-wrapper {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  margin-top: 20px;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+#added-item {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#added-item thead {
+  position: sticky;
+  top: 0px;
+  z-index: 10;
+}
+
+#added-item thead th,
+td {
+  height: 50px;
+  padding: 12px 10px;
+  border: none;
+  border-bottom: 1px solid rgb(196, 195, 195);
+  text-align: center;
+}
+
+#added-item thead th {
+  background-color: rgb(43, 126, 235);
+  color: white;
+}

@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="/assests/css/customer-manage.css" />
 
     <link rel="stylesheet" href="/assests/css/item-manage.css" />
+
+    <link rel="stylesheet" href="/assests/css/order-manage.css" />
   </head>
 
   <body>
@@ -196,6 +198,174 @@
       </div>
     </section>
 
+    <section id="order-manage">
+      <div class="form-container">
+        <form id="invoice-details">
+          <div class="form-title">
+            <h2>Invoice Details</h2>
+          </div>
+
+          <div class="fields-container">
+            <div class="field-row">
+              <div class="input-field">
+                <label for="order-id">Order Id :</label>
+                <input type="text" id="order-id" readonly required />
+              </div>
+
+              <div class="input-field">
+                <label for="order-date">Date :</label>
+                <input type="date" id="order-date" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="customer">Customer :</label>
+                <select id="customer" required>
+                  <option hidden></option>
+                </select>
+              </div>
+
+              <div class="input-field">
+                <label for="customer-id">Customer Id :</label>
+                <input type="text" id="customer-id" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="customer-name">Name :</label>
+                <input type="text" id="customer-name" readonly required />
+              </div>
+
+              <div class="input-field">
+                <label for="customer-salary">Salary :</label>
+                <input type="text" id="customer-salary" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="customer-address">Address :</label>
+                <input type="text" id="customer-address" readonly required />
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <form id="item-select">
+          <div class="form-title">
+            <h2>Item Select</h2>
+          </div>
+
+          <div class="fields-container">
+            <div class="field-row">
+              <div class="input-field">
+                <label for="item">Item :</label>
+                <select id="item" required>
+                  <option hidden></option>
+                </select>
+                <label class="warning" id="item-warning"
+                  >Required! Please select Item Id.</label
+                >
+              </div>
+
+              <div class="input-field">
+                <label for="item-code">Item Code :</label>
+                <input type="text" id="item-code" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="item-description">Item Description :</label>
+                <input type="text" id="item-description" readonly required />
+              </div>
+
+              <div class="input-field">
+                <label for="price">Price :</label>
+                <input type="number" id="price" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="item-qtyOnH">QtyOnH :</label>
+                <input type="number" id="item-qtyOnH" readonly required />
+              </div>
+
+              <div class="input-field">
+                <label for="ordered-qty">Ordered Quantity :</label>
+                <input type="number" id="ordered-qty" required />
+                <label class="warning" id="ordered-qty-warning"
+                  >Qty should be positive number and can not exceed Qty on
+                  Hand!</label
+                >
+              </div>
+            </div>
+
+            <div class="button-container">
+              <button class="red-btn" id="add-item">Add Item</button>
+            </div>
+          </div>
+        </form>
+
+        <form class="purchase-details">
+          <div class="balance-container">
+            <div class="total">
+              <label class="blue-text">Total : </label>
+              <label class="blue-text" id="total">00.0</label>
+              <label class="blue-text">Rs/=</label>
+            </div>
+
+            <div class="total">
+              <label class="red-text">SubTotal : </label>
+              <label class="red-text" id="sub-total">00.0</label>
+              <label class="red-text">Rs/=</label>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="input-field">
+              <label for="cash">Cash :</label>
+              <input type="number" id="cash" required />
+              <label class="warning" id="cash-warning"
+                >Insuffient amount!</label
+              >
+            </div>
+
+            <div class="input-field">
+              <label for="discount">Discount :</label>
+              <input type="number" id="discount" required />
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label for="balance">Balance :</label>
+            <input type="number" id="balance" required readonly />
+          </div>
+
+          <div class="button-container">
+            <button class="green-btn" id="btn-purchase">Purchase</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="added-item">
+          <thead>
+            <th>Item Id</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </thead>
+
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script type="module" src="/controller/IndexController.js"></script>
@@ -203,5 +373,7 @@
     <script type="module" src="/controller/CustomerController.js"></script>
 
     <script type="module" src="/controller/ItemController.js"></script>
+
+    <script type="module" src="/controller/OrderController.js"></script>
   </body>
 </html>
