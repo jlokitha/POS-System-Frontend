@@ -26,9 +26,8 @@ h1 {
 /*CSS for header*/
 
 header {
-  background-color: blue;
+  background-color: #050c9c;
   padding: 10px 20px;
-  margin-bottom: 20px;
   position: sticky;
   top: 0;
 }
@@ -39,7 +38,7 @@ header nav {
   align-items: center;
 }
 
-header nav .section-name {
+header nav #section-name {
   font-size: 2rem;
   color: white;
 }
@@ -57,11 +56,16 @@ header nav .navigation ul li,
 }
 
 header nav .navigation ul li a {
-  color: red;
+  color: white;
   text-decoration: none;
   padding: 10px 12px;
-  background-color: white;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.35s ease-in-out;
+}
+
+header nav .navigation ul li a:hover {
+  background-color: #0b14c2;
 }
 
 header nav #menu,
@@ -95,6 +99,10 @@ header nav .side-bar ul li a {
   cursor: pointer;
 }
 
+header nav .side-bar ul li a:hover {
+  background-color: #0b14c2;
+}
+
 .active {
   display: block !important;
 }
@@ -125,10 +133,16 @@ select {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  filter: opacity(0.7);
+  transition: all 0.35s ease-in-out;
+}
+
+.form-container .button-container button:hover {
+  filter: opacity(1);
 }
 
 .blue-btn {
-  background-color: blue;
+  background-color: #050c9c;
 }
 
 .red-btn {
