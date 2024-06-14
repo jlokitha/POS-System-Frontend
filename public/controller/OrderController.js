@@ -1,11 +1,11 @@
-import { searchCustomer } from "../model/Customer.js";
-import { getAllCustomers } from "../model/Customer.js";
-import { searchItem } from "../model/Item.js";
-import { getAllItems } from "../model/Item.js";
-import { getAllOrders } from "../model/Orders.js";
-import { saveOrder } from "../model/Orders.js";
-import { updateItemQty } from "../model/Item.js";
-import { saveOrderDetail } from "../model/OrderDetails.js";
+import { searchCustomer } from "/public/model/Customer.js";
+import { getAllCustomers } from "/public/model/Customer.js";
+import { searchItem } from "/public/model/Item.js";
+import { getAllItems } from "/public/model/Item.js";
+import { getAllOrders } from "/public/model/Orders.js";
+import { saveOrder } from "/public/model/Orders.js";
+import { updateItemQty } from "/public/model/Item.js";
+import { saveOrderDetail } from "/public/model/OrderDetails.js";
 
 $(document).ready(() => {
   // Elements for reuse
@@ -93,6 +93,7 @@ $(document).ready(() => {
           clearItemFileds();
           clearPurchaseFields();
           itemTable.empty();
+          generateNextOrderId();
         } else {
           alert("Insuffient amount!");
         }
@@ -217,6 +218,8 @@ $(document).ready(() => {
 
   // Function to load all customer ids
   function loadAllCustomerIds() {
+    dCustomer.empty();
+    dCustomer.append(`<option hidden></option>)`);
     getAllCustomers().forEach((cust) => {
       dCustomer.append(`<option value="${cust.id}">${cust.id}</option>)`);
     });
@@ -224,6 +227,8 @@ $(document).ready(() => {
 
   // Function to load all item ids
   function loadAllItemIds() {
+    dItem.empty();
+    dItem.append(`<option hidden></option>`);
     getAllItems().forEach((item) => {
       dItem.append(`<option value="${item.id}">${item.id}</option>`);
     });
@@ -233,7 +238,7 @@ $(document).ready(() => {
   function generateNextOrderId() {
     let orders = getAllOrders();
 
-    if (orders) {
+    if (orders.length === 0) {
       orderId.val("O-001");
       return;
     }
@@ -309,6 +314,11 @@ $(document).ready(() => {
     discount.val("");
     balance.val("");
   }
+
+  $("#order-manage-btn").click(() => {
+    loadAllCustomerIds();
+    loadAllItemIds();
+  });
 
   // Set current date
   function setCurrentDate() {

@@ -1,4 +1,4 @@
-import { items } from "../db/DB.js";
+import { items } from "/public/db/DB.js";
 
 export function saveItem(item) {
   items.push(item);
@@ -29,7 +29,7 @@ export function getAllItems() {
 }
 
 export function updateItemQty(iCode, qty) {
-  items[findIndexOfItems(iCode)].qty = qty;
+  items[findIndexOfItems(iCode)].qty = items[findIndexOfItems(iCode)].qty - qty;
 }
 
 function findIndexOfItems(item) {

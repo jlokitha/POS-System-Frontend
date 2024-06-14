@@ -1,8 +1,8 @@
-import { saveItem } from "../model/Item.js";
-import { updateItem } from "../model/Item.js";
-import { removeItem } from "../model/Item.js";
-import { searchItem } from "../model/Item.js";
-import { getAllItems } from "../model/Item.js";
+import { saveItem } from "/public/model/Item.js";
+import { updateItem } from "/public/model/Item.js";
+import { removeItem } from "/public/model/Item.js";
+import { searchItem } from "/public/model/Item.js";
+import { getAllItems } from "/public/model/Item.js";
 
 $("document").ready(() => {
   //Elements for reuse
