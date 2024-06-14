@@ -1,11 +1,11 @@
-import { searchCustomer } from "/public/model/Customer.js";
-import { getAllCustomers } from "/public/model/Customer.js";
-import { searchItem } from "/public/model/Item.js";
-import { getAllItems } from "/public/model/Item.js";
-import { getAllOrders } from "/public/model/Orders.js";
-import { saveOrder } from "/public/model/Orders.js";
-import { updateItemQty } from "/public/model/Item.js";
-import { saveOrderDetail } from "/public/model/OrderDetails.js";
+import { searchCustomer } from "/model/Customer.js";
+import { getAllCustomers } from "/model/Customer.js";
+import { searchItem } from "/model/Item.js";
+import { getAllItems } from "/model/Item.js";
+import { getAllOrders } from "/model/Orders.js";
+import { saveOrder } from "/model/Orders.js";
+import { updateItemQty } from "/model/Item.js";
+import { saveOrderDetail } from "/model/OrderDetails.js";
 
 $(document).ready(() => {
   // Elements for reuse

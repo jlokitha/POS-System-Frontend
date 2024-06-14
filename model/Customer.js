@@ -1,4 +1,4 @@
-import { customers } from "/public/db/DB.js";
+import { customers } from "/db/DB.js";
 
 export function saveCustomer(customer) {
   customers.push(customer);

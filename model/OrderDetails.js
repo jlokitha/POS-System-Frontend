@@ -1,4 +1,4 @@
-import { orderDetails } from "/public/db/DB.js";
+import { orderDetails } from "/db/DB.js";
 
 export function saveOrderDetail(orderDetail) {
   orderDetails.push(orderDetail);

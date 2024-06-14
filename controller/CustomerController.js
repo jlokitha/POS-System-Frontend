@@ -1,8 +1,8 @@
-import { saveCustomer } from "/public/model/Customer.js";
-import { updateCustomer } from "/public/model/Customer.js";
-import { removeCustomer } from "/public/model/Customer.js";
-import { searchCustomer } from "/public/model/Customer.js";
-import { getAllCustomers } from "/public/model/Customer.js";
+import { saveCustomer } from "/model/Customer.js";
+import { updateCustomer } from "/model/Customer.js";
+import { removeCustomer } from "/model/Customer.js";
+import { searchCustomer } from "/model/Customer.js";
+import { getAllCustomers } from "/model/Customer.js";
 
 $(document).ready(() => {
   // Elements for reuse

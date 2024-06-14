@@ -1,4 +1,4 @@
-import { items } from "/public/db/DB.js";
+import { items } from "/db/DB.js";
 
 export function saveItem(item) {
   items.push(item);
