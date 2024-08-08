@@ -1,14 +1,11 @@
 import { saveCustomer } from "/model/Customer.js";
 import { updateCustomer } from "/model/Customer.js";
-import { removeCustomer } from "../model/Customer.js";
+import { removeCustomer } from "/model/Customer.js";
 import { searchCustomer } from "/model/Customer.js";
 import { getAllCustomers } from "/model/Customer.js";
 
 $(document).ready(() => {
-  // Load all customers when the document is ready
-  loadAllCustomers();
-
-  // JQuery selectors
+  // Elements for reuse
   const custId = $("#cust-id");
   const custName = $("#cust-name");
   const custAddress = $("#cust-address");
@@ -20,10 +17,14 @@ $(document).ready(() => {
   const custSalaryWarning = $("#cust-salary-warning");
 
   // Regular expressions
-  const custIdRegex = /^C-(?!0{3})\d{3,}$/;
+  const custIdRegex = /\d/;
   const custNameRegex = /^[A-Za-z]{3,}(?:\s+[A-Za-z]{3,})*$/;
   const custAddressRegex = /(?=(?:.*[A-Za-z0-9]){5})[A-Za-z0-9'\.\-\s\,]/;
-  const custSalaryRegex = /\$?\d{1,3}(,\d{3})*(\.\d{2})?(\s?K|\s?k|\s?M|\s?m)?/;
+  const custSalaryRegex =
+    /^(\$?\d{1,3}(,\d{3})*|\d+)(\.\d{2})?(\s?K|\s?k|\s?M|\s?m)?$/;
+
+  // Load all customers when the document is ready
+  loadAllCustomers();
 
   // Event listener for save button
   $("#btn-cust-save").click((event) => {
@@ -32,15 +33,15 @@ $(document).ready(() => {
 
     if (validateAll()) {
       saveCustomer({
-        id: custId.val(),
         name: custName.val(),
         address: custAddress.val(),
         salary: custSalary.val(),
       });
 
-      loadAllCustomers();
-      alert("Customer Saved!!!");
+      delay(1000).then(() => loadAllCustomers());
       clearInputs();
+      custId.val(getNewCustId());
+      alert("Customer Saved!!!");
     } else {
       alert("Customer not Saved!!!");
     }
@@ -58,9 +59,10 @@ $(document).ready(() => {
         salary: custSalary.val(),
       });
 
-      loadAllCustomers();
+      delay(1000).then(() => loadAllCustomers());
       alert("Customer Updated!!!");
       clearInputs();
+      custId.val(getNewCustId());
     } else {
       alert("Customer not Updated!!!");
     }
@@ -70,20 +72,10 @@ $(document).ready(() => {
   $("#btn-cust-remove").click((event) => {
     event.preventDefault();
 
-    let result = removeCustomer({
-      id: custId.val(),
-      name: custName.val(),
-      address: custAddress.val(),
-      salary: custSalary.val(),
-    });
-
-    if (result) {
-      loadAllCustomers();
-      alert("Customer Removed!!!");
-      clearInputs();
-    } else {
-      alert("Customer not Removed!!!");
-    }
+    removeCustomer(custId.val());
+    delay(1000).then(() => loadAllCustomers());
+    clearInputs();
+    custId.val(getNewCustId());
   });
 
   // Event listener for clear all button
@@ -93,7 +85,6 @@ $(document).ready(() => {
   });
 
   // Event listeners for input validation
-  custId.on("input", () => validate(custId, custIdRegex, custIdWarning));
   custName.on("input", () =>
     validate(custName, custNameRegex, custNameWarning)
   );
@@ -155,25 +146,33 @@ $(document).ready(() => {
           custSalary.val(customer.salary);
         } else {
           alert("Customer not found!!!");
+          clearInputs();
         }
       } else {
         custId.val("").css("border-color", "green");
         custIdWarning.hide();
         custId.val(getNewCustId());
+        custName.focus();
       }
-      custName.focus();
     }
   });
 
   // Function to load all customers into the table
   function loadAllCustomers() {
     $("#cust-table tbody").empty();
-
-    getAllCustomers().forEach(appendToTable);
+    getAllCustomers()
+      .then((values) => {
+        values.forEach(appendToTable);
+      })
+      .catch((error) => {
+        console.error("Error fetching customers:", error);
+      });
   }
 
   // Function to append a customer to the table
   function appendToTable(customer) {
+    console.log(customer);
+
     $("#cust-table tbody").append(
       `<tr>
         <td>${customer.id}</td>
@@ -201,15 +200,12 @@ $(document).ready(() => {
 
   // Function to generate a new customer ID
   function getNewCustId() {
-    let customers = getAllCustomers();
-    if (customers.length === 0) {
-      return "C-001";
-    }
+    const rows = $("#cust-table tbody tr");
 
-    let currentId = customers[customers.length - 1].id;
-    let parts = currentId.split("-");
-    let num = parseInt(parts[1], 10) + 1;
-    return parts[0] + "-" + num.toString().padStart(3, "0");
+    if (rows.length !== 0) {
+      let id = rows.last().find("td").eq(0).text().trim();
+      return parseInt(id, 10) + 1;
+    }
   }
 
   // Click event listener for table row
@@ -225,4 +221,8 @@ $(document).ready(() => {
     custAddress.val(address);
     custSalary.val(salary);
   });
+
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 });

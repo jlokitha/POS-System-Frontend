@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>POS System</title>
+    <title>TradeTrack</title>
+
+    <link rel="icon" type="image/x-icon" href="/assests/img/logo.jpg" />
 
     <link
       rel="stylesheet"
@@ -13,32 +15,48 @@
       referrerpolicy="no-referrer"
     />
 
-    <link rel="stylesheet" href="/assests/css/style.css" />
+    <link rel="stylesheet" href="../assests/css/style.css" />
 
-    <link rel="stylesheet" href="/assests/css/customer-manage.css" />
+    <link rel="stylesheet" href="../assests/css/home-section.css" />
+
+    <link rel="stylesheet" href="../assests/css/customer-manage.css" />
+
+    <link rel="stylesheet" href="../assests/css/item-manage.css" />
+
+    <link rel="stylesheet" href="../assests/css/order-manage.css" />
   </head>
 
   <body>
     <header>
       <nav>
-        <div class="section-name">Section Name</div>
+        <div id="section-name">TradeTrack</div>
 
         <div class="navigation">
           <ul>
             <li>
-              <a href="#">Home</a>
+              <a data="TradeTrack" href="#home" class="nav-item">Home</a>
             </li>
 
             <li>
-              <a href="#">Customer</a>
+              <a data="Customer Manage" href="#customer-manage" class="nav-item"
+                >Customer</a
+              >
             </li>
 
             <li>
-              <a href="#">Item</a>
+              <a data="Item Manage" href="#item-manage" class="nav-item"
+                >Item</a
+              >
             </li>
 
             <li>
-              <a href="#">Orders</a>
+              <a
+                data="Order Manage"
+                href="#order-manage"
+                class="nav-item"
+                id="order-manage-btn"
+                >Orders</a
+              >
             </li>
           </ul>
         </div>
@@ -51,24 +69,52 @@
         <div class="side-bar">
           <ul>
             <li>
-              <a href="#">Home</a>
+              <a data="TradeTrack" href="#home" class="nav-item">Home</a>
             </li>
 
             <li>
-              <a href="#">Customer</a>
+              <a data="Customer Manage" href="#customer-manage" class="nav-item"
+                >Customer</a
+              >
             </li>
 
             <li>
-              <a href="#">Item</a>
+              <a data="Item Manage" href="#item-manage" class="nav-item"
+                >Item</a
+              >
             </li>
 
             <li>
-              <a href="#">Orders</a>
+              <a data="Order Manage" href="#order-manage" class="nav-item"
+                >Orders</a
+              >
             </li>
           </ul>
         </div>
       </nav>
     </header>
+
+    <section id="home">
+      <div class="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/assests/img/welcome.jpg" alt="Image 1" />
+          </div>
+          <div class="carousel-item">
+            <img src="/assests/img/shop-img.jpg" alt="Image 2" />
+          </div>
+          <div class="carousel-item">
+            <img src="/assests/img/now-open-img.jpg" alt="Image 3" />
+          </div>
+        </div>
+        <button class="carousel-control prev" onclick="prevSlide()">
+          &#10094;
+        </button>
+        <button class="carousel-control next" onclick="nextSlide()">
+          &#10095;
+        </button>
+      </div>
+    </section>
 
     <section id="customer-manage">
       <div class="form-container">
@@ -77,10 +123,7 @@
         <form id="cust-form">
           <div class="input-field">
             <label for="cust-id">Customer ID</label>
-            <input type="text" required id="cust-id" />
-            <label class="warning" id="cust-id-warning"
-              >Enter customer ID ex:- C-000</label
-            >
+            <input type="number" required id="cust-id" />
           </div>
 
           <div class="input-field">
@@ -103,7 +146,7 @@
             <label for="cust-salary">Customer Salary</label>
             <input type="number" required id="cust-salary" />
             <label class="warning" id="cust-salary-warning"
-              >Required ex:- 100.00 or 100</label
+              >Required! ex:- 100.00 or 100</label
             >
           </div>
 
@@ -111,7 +154,6 @@
             <button class="blue-btn" id="btn-cust-save">Save Customer</button>
             <button class="red-btn" id="btn-cust-remove">Remove</button>
             <button class="yellow-btn" id="btn-cust-update">Update</button>
-            <!-- <button class="green-btn" id="btn-get-all">Get All</button> -->
             <button class="red-btn" id="btn-cust-clear-all">Clear All</button>
           </div>
         </form>
@@ -133,10 +175,244 @@
       </div>
     </section>
 
+    <section id="item-manage">
+      <div class="form-container">
+        <h1>Item Form</h1>
+
+        <form id="item-form">
+          <div class="input-field">
+            <label for="item-id">Item ID</label>
+            <input type="text" required id="item-id" />
+            <label class="warning" id="item-id-warning"
+              >Enter Item Id ex:- I-000</label
+            >
+          </div>
+
+          <div class="input-field">
+            <label for="item-desc">Item Description</label>
+            <input type="text" required id="item-desc" />
+            <label class="warning" id="item-name-warning"
+              >Should contain at least 3 letters.</label
+            >
+          </div>
+
+          <div class="input-field">
+            <label for="item-qty">Item Qauntity</label>
+            <input type="number" required id="item-qty" />
+            <label class="warning" id="item-qty-warning"
+              >Required! Enter only positive numbers</label
+            >
+          </div>
+
+          <div class="input-field">
+            <label for="item-price">Item Price</label>
+            <input type="number" required id="item-price" />
+            <label class="warning" id="item-price-warning"
+              >Required! ex:- 100.00 or 100</label
+            >
+          </div>
+
+          <div class="button-container">
+            <button class="blue-btn" id="btn-item-save">Save Item</button>
+            <button class="red-btn" id="btn-item-remove">Remove</button>
+            <button class="yellow-btn" id="btn-item-update">Update</button>
+            <button class="red-btn" id="btn-item-clear-all">Clear All</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table id="item-table">
+          <thead>
+            <tr>
+              <th>Item Id</th>
+              <th>Item Desc</th>
+              <th>Item Qauntity</th>
+              <th>Item Price</th>
+            </tr>
+          </thead>
+
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="order-manage">
+      <div class="form-container">
+        <form id="invoice-details">
+          <div class="form-title">
+            <h2>Invoice Details</h2>
+          </div>
+
+          <div class="fields-container">
+            <div class="field-row">
+              <div class="input-field">
+                <label for="order-id">Order Id :</label>
+                <input type="text" id="order-id" readonly required />
+              </div>
+
+              <div class="input-field">
+                <label for="order-date">Date :</label>
+                <input type="date" id="order-date" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="customer">Customer :</label>
+                <select id="customer" required>
+                  <option hidden></option>
+                </select>
+              </div>
+
+              <div class="input-field">
+                <label for="customer-id">Customer Id :</label>
+                <input type="text" id="customer-id" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="customer-name">Name :</label>
+                <input type="text" id="customer-name" readonly required />
+              </div>
+
+              <div class="input-field">
+                <label for="customer-salary">Salary :</label>
+                <input type="text" id="customer-salary" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="customer-address">Address :</label>
+                <input type="text" id="customer-address" readonly required />
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <form id="item-select">
+          <div class="form-title">
+            <h2>Item Select</h2>
+          </div>
+
+          <div class="fields-container">
+            <div class="field-row">
+              <div class="input-field">
+                <label for="item">Item :</label>
+                <select id="item" required>
+                  <option hidden></option>
+                </select>
+                <label class="warning" id="item-warning"
+                  >Required! Please select Item Id.</label
+                >
+              </div>
+
+              <div class="input-field">
+                <label for="item-code">Item Code :</label>
+                <input type="text" id="item-code" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="item-description">Item Description :</label>
+                <input type="text" id="item-description" readonly required />
+              </div>
+
+              <div class="input-field">
+                <label for="price">Price :</label>
+                <input type="number" id="price" readonly required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="input-field">
+                <label for="item-qtyOnH">QtyOnH :</label>
+                <input type="number" id="item-qtyOnH" readonly required />
+              </div>
+
+              <div class="input-field">
+                <label for="ordered-qty">Ordered Quantity :</label>
+                <input type="number" id="ordered-qty" required />
+                <label class="warning" id="ordered-qty-warning"
+                  >Qty should be positive number and can not exceed Qty on
+                  Hand!</label
+                >
+              </div>
+            </div>
+
+            <div class="button-container">
+              <button class="red-btn" id="add-item">Add Item</button>
+            </div>
+          </div>
+        </form>
+
+        <form class="purchase-details">
+          <div class="balance-container">
+            <div class="total">
+              <label class="blue-text">Total : </label>
+              <label class="blue-text" id="total">00.0</label>
+              <label class="blue-text">Rs/=</label>
+            </div>
+
+            <div class="total">
+              <label class="red-text">SubTotal : </label>
+              <label class="red-text" id="sub-total">00.0</label>
+              <label class="red-text">Rs/=</label>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="input-field">
+              <label for="cash">Cash :</label>
+              <input type="number" id="cash" required />
+              <label class="warning" id="cash-warning"
+                >Insuffient amount!</label
+              >
+            </div>
+
+            <div class="input-field">
+              <label for="discount">Discount :</label>
+              <input type="number" id="discount" required />
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label for="balance">Balance :</label>
+            <input type="number" id="balance" required readonly />
+          </div>
+
+          <div class="button-container">
+            <button class="green-btn" id="btn-purchase">Purchase</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="added-item">
+          <thead>
+            <th>Item Id</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </thead>
+
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script type="module" src="/controller/IndexController.js"></script>
 
     <script type="module" src="/controller/CustomerController.js"></script>
+
+    <script type="module" src="/controller/ItemController.js"></script>
+
+    <script type="module" src="/controller/OrderController.js"></script>
   </body>
 </html>
