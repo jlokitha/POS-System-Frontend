@@ -17,7 +17,7 @@ $("document").ready(() => {
   const itemPriceWarning = $("#item-price-warning");
 
   // Regular expressions
-  const itemIdRegex = /^I-(?!0{3})\d{3,}$/;
+  const itemIdRegex = /\d/;
   const itemDescRegex = /^[A-Za-z]{3,}(?:\s+[A-Za-z]{3,})*$/;
   const itemQtyRegex = /^\d+(?:\.\d+)?$/;
   const itemPriceRegex =
@@ -34,14 +34,14 @@ $("document").ready(() => {
 
     if (validateAll()) {
       saveItem({
-        id: itemId.val(),
-        desc: itemDesc.val(),
-        qty: itemQty.val(),
+        description: itemDesc.val(),
+        quantity: itemQty.val(),
         price: itemPrice.val(),
       });
 
-      loadAllItems();
+      delay(1000).then(() => loadAllItems())
       clearInputs();
+      itemId.val(getNewItemId());
       alert("Item Saved!!!");
     } else {
       alert("Item not Saved!!!");
@@ -55,14 +55,15 @@ $("document").ready(() => {
     if (validateAll()) {
       updateItem({
         id: itemId.val(),
-        desc: itemDesc.val(),
-        qty: itemQty.val(),
+        description: itemDesc.val(),
+        quantity: itemQty.val(),
         price: itemPrice.val(),
       });
 
-      loadAllItems();
-      clearInputs();
       alert("Item Updated!!!");
+      delay(1000).then(() => loadAllItems())
+      clearInputs();
+      itemId.val(getNewItemId())
     } else {
       alert("Item not Updated!!!");
     }
@@ -72,20 +73,10 @@ $("document").ready(() => {
   $("#btn-item-remove").click((event) => {
     event.preventDefault();
 
-    let result = removeItem({
-      id: itemId.val(),
-      desc: itemDesc.val(),
-      qty: itemQty.val(),
-      price: itemPrice.val(),
-    });
-
-    if (result) {
-      loadAllItems();
-      clearInputs();
-      alert("Item Removed!!!");
-    } else {
-      alert("Item not Removed!!!");
-    }
+    removeItem(itemId.val());
+    delay(1000).then(() => loadAllItems())
+    clearInputs();
+    itemId.val(getNewItemId())
   });
 
   // Event listner for clear all button
@@ -171,7 +162,13 @@ $("document").ready(() => {
   function loadAllItems() {
     $("#item-table tbody").empty();
 
-    getAllItems().forEach(appendToTable);
+    getAllItems()
+        .then((values) => {
+          values.forEach(appendToTable);
+        })
+        .catch((error) => {
+          console.error("Error fetching items:", error);
+        });
   }
 
   //Function to append a item to the table
@@ -179,8 +176,8 @@ $("document").ready(() => {
     $("#item-table tbody").append(
       `<tr>
         <td>${item.id}</td>
-        <td>${item.desc}</td>
-        <td>${item.qty}</td>
+        <td>${item.description}</td>
+        <td>${item.quantity}</td>
         <td>${item.price}</td>
       </tr>`
     );
@@ -203,15 +200,12 @@ $("document").ready(() => {
 
   // Function to generate a new item ID
   function getNewItemId() {
-    let items = getAllItems();
-    if (items.length === 0) {
-      return "I-001";
-    }
+    let rows = $("#item-table tbody tr");
 
-    let currentId = items[items.length - 1].id;
-    let parts = currentId.split("-");
-    let num = parseInt(parts[1], 10) + 1;
-    return parts[0] + "-" + num.toString().padStart(3, 0);
+    if (rows.length !== 0) {
+      let id = rows.last().find("td").eq(0).text().trim();
+      return parseInt(id, 10) + 1;
+    }
   }
 
   // Validation function
@@ -225,5 +219,9 @@ $("document").ready(() => {
       label.show();
       return false;
     }
+  }
+
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 });
