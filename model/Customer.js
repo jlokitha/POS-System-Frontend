@@ -56,34 +56,33 @@ export function removeCustomer(id) {
     }
   };
   http.open(
-    "DELETE",
-    `http://localhost:8080/pos_system/customer?id=${id}`,
-    true
+      "DELETE",
+      `http://localhost:8080/pos_system/customer?id=${id}`,
+      true
   );
   http.send();
 }
 
 export function searchCustomer(id) {
-  const http = new XMLHttpRequest();
-  http.onreadystatechange = () => {
-    if (http.readyState === 4) {
-      if (http.status === 204) {
-        console.log("Customer found");
-      } else {
-        console.error("Customer no found");
-        console.error("Status", http.status);
-        console.error("Ready State", http.readyState);
+  return new Promise((resolve, reject) => {
+    const http = new XMLHttpRequest();
+    http.onreadystatechange = () => {
+      if (http.readyState === 4) {
+        if (http.status === 200) {
+          try {
+            const customers = JSON.parse(http.responseText);
+            resolve(customers);
+          } catch (error) {
+            reject("Failed to parse customer data");
+          }
+        } else {
+          reject(`Failed to fetch customer: Status ${http.status}`);
+        }
       }
-    } else {
-      console.error("Ready State", http.readyState);
-    }
-  };
-  http.open(
-    "GET",
-    `http://localhost:8080/pos_system/customer?customerId=${id}`,
-    true
-  );
-  http.send();
+    };
+    http.open("GET", `http://localhost:8080/pos_system/customer?id=${id}`, true);
+    http.send();
+  });
 }
 
 export function getAllCustomers() {
@@ -94,7 +93,7 @@ export function getAllCustomers() {
         if (http.status === 200) {
           try {
             const customers = JSON.parse(http.responseText);
-            resolve(customers); // Return the customer array
+            resolve(customers);
           } catch (error) {
             reject("Failed to parse customer data");
           }

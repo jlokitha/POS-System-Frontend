@@ -65,27 +65,26 @@ export function removeItem(id) {
   http.send();
 }
 
-export function searchItem(itemId) {
-  const http = new XMLHttpRequest();
-  http.onreadystatechange = () => {
-    if (http.readyState === 4) {
-      if (http.status === 204) {
-        console.log("Item found");
-      } else {
-        console.error("Item no found");
-        console.error("Status", http.status);
-        console.error("Ready State", http.readyState);
+export function searchItem(id) {
+  return new Promise((resolve, reject) => {
+    const http = new XMLHttpRequest();
+    http.onreadystatechange = () => {
+      if (http.readyState === 4) {
+        if (http.status === 200) {
+          try {
+            const item = JSON.parse(http.responseText);
+            resolve(item);
+          } catch (error) {
+            reject("Failed to parse item data");
+          }
+        } else {
+          reject(`Failed to fetch item: Status ${http.status}`);
+        }
       }
-    } else {
-      console.error("Ready State", http.readyState);
-    }
-  };
-  http.open(
-      "GET",
-      `http://localhost:8080/pos_system/customer?item=${id}`,
-      true
-  );
-  http.send();
+    };
+    http.open("GET", `http://localhost:8080/pos_system/item?id=${id}`, true);
+    http.send();
+  });
 }
 
 export function getAllItems() {
@@ -95,8 +94,8 @@ export function getAllItems() {
       if (http.readyState === 4) {
         if (http.status === 200) {
           try {
-            const customers = JSON.parse(http.responseText);
-            resolve(customers); // Return the customer array
+            const items = JSON.parse(http.responseText);
+            resolve(items);
           } catch (error) {
             reject("Failed to parse item data");
           }
@@ -108,8 +107,4 @@ export function getAllItems() {
     http.open("GET", "http://localhost:8080/pos_system/item", true);
     http.send();
   });
-}
-
-export function updateItemQty(iCode, qty) {
-  // items[findIndexOfItems(iCode)].qty = items[findIndexOfItems(iCode)].qty - qty;
 }
