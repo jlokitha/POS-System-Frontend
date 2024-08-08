@@ -1,33 +1,110 @@
-import { customers } from "/db/DB.js";
-
 export function saveCustomer(customer) {
-  customers.push(customer);
+  const customerJSON = JSON.stringify(customer);
+  const http = new XMLHttpRequest();
+  http.onreadystatechange = () => {
+    if (http.readyState === 4) {
+      if (http.status === 200 || http.status === 201) {
+        console.log(JSON.stringify(http.responseText));
+      } else {
+        console.error("Customer Save Unsuccessful");
+        console.error("Status", http.status);
+        console.error("Ready State", http.readyState);
+      }
+    } else {
+      console.error("Ready State", http.readyState);
+    }
+  };
+  http.open("POST", "http://localhost:8080/pos_system/customer", true);
+  http.setRequestHeader("Content-Type", "application/json");
+  http.send(customerJSON);
 }
 
 export function updateCustomer(customer) {
-  customers[findIndexOfCustomers(customer)] = customer;
+  const customerJSON = JSON.stringify(customer);
+  const http = new XMLHttpRequest();
+  http.onreadystatechange = () => {
+    if (http.readyState === 4) {
+      if (http.status === 200 || http.status === 201) {
+        console.log(JSON.stringify(http.responseText));
+      } else {
+        console.error("Customer Save Unsuccessful");
+        console.error("Status", http.status);
+        console.error("Ready State", http.readyState);
+      }
+    } else {
+      console.error("Ready State", http.readyState);
+    }
+  };
+  http.open("PUT", "http://localhost:8080/pos_system/customer", true);
+  http.setRequestHeader("Content-Type", "application/json");
+  http.send(customerJSON);
 }
 
-export function removeCustomer(customer) {
-  const index = findIndexOfCustomers(customer);
-  if (index !== -1) {
-    customers.splice(index, 1);
-    return true;
-  } else {
-    return false;
-  }
+export function removeCustomer(id) {
+  const http = new XMLHttpRequest();
+  http.onreadystatechange = () => {
+    if (http.readyState === 4) {
+      if (http.status === 204) {
+        console.log("Customer deleted successfully");
+        return "removed";
+      } else {
+        console.error("Customer Delete Unsuccessful");
+        console.error("Status", http.status);
+        console.error("Ready State", http.readyState);
+      }
+    } else {
+      console.error("Ready State", http.readyState);
+    }
+  };
+  http.open(
+    "DELETE",
+    `http://localhost:8080/pos_system/customer?id=${id}`,
+    true
+  );
+  http.send();
 }
 
-export function searchCustomer(custId) {
-  const customer = customers.find((cust) => cust.id === custId);
-
-  return customer !== undefined ? customer : false;
+export function searchCustomer(id) {
+  const http = new XMLHttpRequest();
+  http.onreadystatechange = () => {
+    if (http.readyState === 4) {
+      if (http.status === 204) {
+        console.log("Customer found");
+      } else {
+        console.error("Customer no found");
+        console.error("Status", http.status);
+        console.error("Ready State", http.readyState);
+      }
+    } else {
+      console.error("Ready State", http.readyState);
+    }
+  };
+  http.open(
+    "GET",
+    `http://localhost:8080/pos_system/customer?customerId=${id}`,
+    true
+  );
+  http.send();
 }
 
 export function getAllCustomers() {
-  return customers;
-}
-
-function findIndexOfCustomers(customer) {
-  return customers.findIndex((element) => element.id === customer.id);
+  return new Promise((resolve, reject) => {
+    const http = new XMLHttpRequest();
+    http.onreadystatechange = () => {
+      if (http.readyState === 4) {
+        if (http.status === 200) {
+          try {
+            const customers = JSON.parse(http.responseText);
+            resolve(customers); // Return the customer array
+          } catch (error) {
+            reject("Failed to parse customer data");
+          }
+        } else {
+          reject(`Failed to fetch customers: Status ${http.status}`);
+        }
+      }
+    };
+    http.open("GET", "http://localhost:8080/pos_system/customer", true);
+    http.send();
+  });
 }
