@@ -27,7 +27,7 @@ export function updateCustomer(customer) {
       if (http.status === 200 || http.status === 201) {
         console.log(JSON.stringify(http.responseText));
       } else {
-        console.error("Customer Save Unsuccessful");
+        console.error("Customer Update Unsuccessful");
         console.error("Status", http.status);
         console.error("Ready State", http.readyState);
       }
@@ -46,7 +46,6 @@ export function removeCustomer(id) {
     if (http.readyState === 4) {
       if (http.status === 204) {
         console.log("Customer deleted successfully");
-        return "removed";
       } else {
         console.error("Customer Delete Unsuccessful");
         console.error("Status", http.status);

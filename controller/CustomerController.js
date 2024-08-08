@@ -38,10 +38,10 @@ $(document).ready(() => {
         salary: custSalary.val(),
       });
 
+      alert("Customer Saved!!!");
       delay(1000).then(() => loadAllCustomers());
       clearInputs();
       custId.val(getNewCustId());
-      alert("Customer Saved!!!");
     } else {
       alert("Customer not Saved!!!");
     }
@@ -59,8 +59,8 @@ $(document).ready(() => {
         salary: custSalary.val(),
       });
 
-      delay(1000).then(() => loadAllCustomers());
       alert("Customer Updated!!!");
+      delay(1000).then(() => loadAllCustomers());
       clearInputs();
       custId.val(getNewCustId());
     } else {
@@ -171,8 +171,6 @@ $(document).ready(() => {
 
   // Function to append a customer to the table
   function appendToTable(customer) {
-    console.log(customer);
-
     $("#cust-table tbody").append(
       `<tr>
         <td>${customer.id}</td>
