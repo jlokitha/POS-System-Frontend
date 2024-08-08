@@ -56,7 +56,6 @@ export function removeCustomer(id) {
       console.error("Ready State", http.readyState);
     }
   };
-
   http.open(
     "DELETE",
     `http://localhost:8080/pos_system/customer?id=${id}`,

@@ -10,7 +10,8 @@
 }
 
 body {
-  max-height: 100vh;
+  height: 100vh;
+  background-color: rgb(235, 235, 235);
 }
 
 section {
@@ -25,9 +26,8 @@ h1 {
 /*CSS for header*/
 
 header {
-  background-color: blue;
+  background-color: #050c9c;
   padding: 10px 20px;
-  margin-bottom: 20px;
   position: sticky;
   top: 0;
 }
@@ -38,29 +38,34 @@ header nav {
   align-items: center;
 }
 
-header nav .section-name {
+header nav #section-name {
   font-size: 2rem;
   color: white;
 }
 
 header nav .navigation ul {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  gap: 1px;
 }
 
 header nav .navigation ul li,
 .side-bar ul li {
   list-style: none;
+  margin-right: 1px;
 }
 
 header nav .navigation ul li a {
-  color: red;
+  color: white;
   text-decoration: none;
   padding: 10px 12px;
-  background-color: white;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.35s ease-in-out;
+}
+
+header nav .navigation ul li a:hover {
+  background-color: #0b14c2;
 }
 
 header nav #menu,
@@ -94,10 +99,88 @@ header nav .side-bar ul li a {
   cursor: pointer;
 }
 
+header nav .side-bar ul li a:hover {
+  background-color: #0b14c2;
+}
+
 .active {
   display: block !important;
 }
 
+/* CSS for input field */
+.form-container .input-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.input-field input,
+select {
+  height: 5vh;
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 0 10px;
+  outline: none;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+/* CSS for buttons */
+.form-container .button-container button {
+  padding: 10px 12px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  filter: opacity(0.7);
+  transition: all 0.35s ease-in-out;
+}
+
+.form-container .button-container button:hover {
+  filter: opacity(1);
+}
+
+.blue-btn {
+  background-color: #050c9c;
+}
+
+.red-btn {
+  background-color: red;
+}
+
+.yellow-btn {
+  background-color: yellow;
+  color: black !important;
+}
+
+.green-btn {
+  background-color: green;
+}
+
+/* CSS for warning label */
+.warning {
+  font-size: 0.7rem;
+  color: red;
+  display: none;
+}
+
+/* CSS for table container */
+.table-container {
+  width: 100%;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.table-container::-webkit-scrollbar {
+  display: none;
+}
+
+td {
+  cursor: pointer;
+}
+
+/* Media query for header */
 @media (max-width: 768px) {
   header nav .navigation {
     display: none;

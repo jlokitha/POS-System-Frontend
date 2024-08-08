@@ -1,4 +1,4 @@
-#customer-manage {
+#item-manage {
   width: 100%;
   height: 85vh;
   margin-top: 10px;
@@ -8,36 +8,26 @@
   align-items: flex-start;
 }
 
-#customer-manage .form-container {
+#item-manage .form-container {
   padding: 10px 20px 15px 20px;
   border-radius: 10px;
   background-color: white;
   height: fit-content;
 }
 
-.table-container {
-  width: 100%;
-  height: auto;
-  max-height: 650px;
-  position: relative;
-  overflow-y: scroll;
-  background-color: white;
-  border-radius: 10px 10px 0 0;
-}
-
-#cust-table {
+#item-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-#cust-table thead {
+#item-table thead {
   border-radius: 10px 10px 0 0;
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
-#cust-table thead th,
+#item-table thead th,
 td {
   height: 50px;
   padding: 12px 10px;
@@ -46,7 +36,7 @@ td {
   text-align: center;
 }
 
-#cust-table thead th {
+#item-table thead th {
   background-color: #3572ef;
   color: white;
 }
