@@ -47,12 +47,12 @@ To install and run the System, follow these steps:
 1. Clone the repository:
    
    ```bash
-   git clone https://github.com/jlokitha/POS-system.git
+   git clone https://github.com/jlokitha/POS-System-Frontend.git
 
 2. Navigate to the project directory:
    
    ```bash
-   cd POS-system
+   cd POS-System-Frontend
    
 3. Open the project in VS Code:
    
