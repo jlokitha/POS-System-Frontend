@@ -203,6 +203,8 @@ $(document).ready(() => {
     if (rows.length !== 0) {
       let id = rows.last().find("td").eq(0).text().trim();
       return parseInt(id, 10) + 1;
+    } else {
+      return 1;
     }
   }
 
