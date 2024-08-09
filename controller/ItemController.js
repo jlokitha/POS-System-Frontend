@@ -30,7 +30,6 @@ $("document").ready(() => {
   // Event listener for save button
   $("#btn-item-save").click((event) => {
     event.preventDefault();
-    itemId.val(getNewItemId());
 
     if (validateAll()) {
       saveItem({
@@ -39,10 +38,11 @@ $("document").ready(() => {
         price: itemPrice.val(),
       });
 
-      delay(1000).then(() => loadAllItems())
-      clearInputs();
-      itemId.val(getNewItemId());
       alert("Item Saved!!!");
+      delay(1000).then(() => {
+        loadAllItems();
+        clearInputs();
+      })
     } else {
       alert("Item not Saved!!!");
     }
@@ -63,7 +63,7 @@ $("document").ready(() => {
       alert("Item Updated!!!");
       delay(1000).then(() => loadAllItems())
       clearInputs();
-      itemId.val(getNewItemId())
+      itemId.val(getNewItemId());
     } else {
       alert("Item not Updated!!!");
     }
@@ -205,6 +205,8 @@ $("document").ready(() => {
     if (rows.length !== 0) {
       let id = rows.last().find("td").eq(0).text().trim();
       return parseInt(id, 10) + 1;
+    } else {
+      return 1;
     }
   }
 
